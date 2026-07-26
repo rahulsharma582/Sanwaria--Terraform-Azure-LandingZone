@@ -1,0 +1,38 @@
+name: Main Branch CD
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+jobs:
+
+  terraform:
+
+    runs-on: ubuntu-latest
+
+    environment: Production
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Format
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+
+    - name: Apply
+      run: terraform apply -auto-approve tfplan
