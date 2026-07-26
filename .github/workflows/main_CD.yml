@@ -44,4 +44,4 @@ jobs:
       working-directory: enviornments/prod
 
     - name: Apply
-      run: terraform apply -auto-approve tfplan
+      run: terraform apply -auto-approve 
