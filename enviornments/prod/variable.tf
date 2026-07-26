@@ -1,0 +1,10 @@
+variable "rgs" {}
+variable "vnet" {}
+variable "snet" {}
+variable "pip" {}
+variable "vm" {}
+variable "nic" {}
+variable "app_vm" {}
+variable "db_vm" {}
+variable "ilb" {}
+variable "appgw" {}
