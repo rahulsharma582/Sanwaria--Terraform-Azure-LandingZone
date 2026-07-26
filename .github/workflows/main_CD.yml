@@ -33,6 +33,11 @@ jobs:
     - name: Terraform Validate
       run: terraform validate
       working-directory: enviornments/prod
+
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+       creds: ${{ secrets.azure_cred123 }}
       
     - name: Terraform Plan
       run: terraform plan
