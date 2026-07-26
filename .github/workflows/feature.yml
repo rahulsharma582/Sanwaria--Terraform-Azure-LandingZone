@@ -1,0 +1,43 @@
+name: Feature Branch CI
+
+on:
+  push:
+    branches:
+      - "feature/**"
+
+jobs:
+
+  terraform-ci:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Format
+      run: terraform fmt -check -recursive
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan
+
+    - name: TFSec
+      uses: aquasecurity/tfsec-action@v1
+
+    - name: TFLint
+      uses: terraform-linters/setup-tflint@v4
+
+    - run: |
+        tflint --init
+        tflint
+
+    - name: Gitleaks
+      uses: gitleaks/gitleaks-action@v2
