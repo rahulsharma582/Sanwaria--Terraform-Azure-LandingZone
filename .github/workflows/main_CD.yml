@@ -28,10 +28,12 @@ jobs:
       
     - name: Terraform Init
       run: terraform init
-  
+      working-directory: environments/prod
+      
     - name: Terraform Validate
       run: terraform validate
-
+      working-directory: environments/prod
+      
     - name: Terraform Plan
       run: terraform plan
       working-directory: environments/prod
